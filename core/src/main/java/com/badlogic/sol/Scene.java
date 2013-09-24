@@ -1,6 +1,7 @@
 package com.badlogic.sol;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.sol.command.New;
 
 public class Scene {
 	protected Array<Command> commands = new Array<Command>();
@@ -15,5 +16,13 @@ public class Scene {
 				break;
 			}
 		}
+	}
+	
+	public void add(Drawable drawable) {
+		commands.add(new New(drawable));
+	}
+	
+	public void add(Command command) {
+		commands.add(command);
 	}
 }
