@@ -8,15 +8,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.sol.Drawable;
 import com.badlogic.sol.Game;
 
-public class Fadein extends Drawable {
+public class Fade extends Drawable {
 	Color color;
 	float duration;
+	boolean isFadeIn;
 	float stateTime;
 	
-	public Fadein (Color color, float duration) {
+	public Fade (Color color, float duration, boolean isFadeIn) {
 		super("", 0, 0, 10000000);
 		this.color = color;
 		this.duration = duration;
+		this.isFadeIn = isFadeIn;
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class Fadein extends Drawable {
 			Game.ctx.removeDrawable(this);
 		}
 		
-		float alpha = 1 - stateTime / duration;
+		float alpha = isFadeIn? (1 - stateTime / duration): (stateTime / duration);
 		Game.ctx.getBatch().end();
 
 		Gdx.gl.glEnable(GL20.GL_BLEND);

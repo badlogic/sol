@@ -15,7 +15,11 @@ public class TextDrawable extends Drawable {
 	float duration;
 	float stateTime;
 	
-	public TextDrawable(String fontName, Color color, String text, float duration, int x, int y, int z) {
+	public TextDrawable(String text, Color color, float duration, int x, int y, int z) {
+		this("default", text, color, duration, x, y, z);
+	}
+	
+	public TextDrawable(String fontName, String text, Color color, float duration, int x, int y, int z) {
 		super("" + MathUtils.random(), x, y, z);
 		this.fontName = fontName;
 		this.color = color;
