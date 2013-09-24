@@ -2,6 +2,7 @@ package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
 import com.badlogic.sol.Game;
+import com.badlogic.sol.drawables.ImageDrawable;
 
 public class NewImage implements Command {
 	String name;
@@ -18,7 +19,7 @@ public class NewImage implements Command {
 
 	@Override
 	public void update (float delta) {
-		Game.ctx.addImage(name, imageName, x, y, z);
+		Game.ctx.addDrawable(new ImageDrawable(name, imageName, x, y, z));
 	}
 
 	@Override

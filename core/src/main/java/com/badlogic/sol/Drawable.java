@@ -8,8 +8,11 @@ public abstract class Drawable {
 	public float x;
 	public float y;
 	
-	public Drawable(String name) {
+	public Drawable(String name, int x, int y, int z) {
 		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 	
 	public abstract void draw(float deltaTime, SpriteBatch batch);

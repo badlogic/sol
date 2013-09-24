@@ -16,7 +16,7 @@ public class SetAnimation implements Command {
 	
 	@Override
 	public void update (float delta) {
-		((AnimationDrawable)Game.ctx.getDrawable(name)).animationName = animationName;
+		((AnimationDrawable)Game.ctx.getDrawable(name)).setAnimation(animationName);
 	}
 
 	@Override

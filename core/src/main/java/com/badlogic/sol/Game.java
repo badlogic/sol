@@ -1,27 +1,29 @@
 package com.badlogic.sol;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.sol.drawables.AnimationDrawable;
 import com.badlogic.sol.drawables.ImageDrawable;
+import com.badlogic.sol.drawables.TextDrawable;
 
 public class Game {
 	public static Game ctx;
 	SpriteBatch batch;
 	OrthographicCamera camera;
 	Array<Drawable> drawables = new Array<Drawable>();
+	Set<Drawable> removed = new HashSet<Drawable>();
 	Scene scene;
-	BitmapFont font;
 	Vector3 v = new Vector3();
 	ShapeRenderer renderer;
 	
@@ -31,7 +33,6 @@ public class Game {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 320, 240);
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		renderer = new ShapeRenderer();
 	}
 	
@@ -56,36 +57,44 @@ public class Game {
 		
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
+		renderer.setProjectionMatrix(camera.combined);
+		
 		batch.begin();
 		for(Drawable d: drawables) {
 			d.draw(deltaTime, batch);
 		}
 		camera.unproject(v.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-		font.draw(batch, (int)v.x + ", " + (int)v.y, 0, 20);
+		Assets.font.draw(batch, (int)v.x + ", " + (int)v.y, 0, 12);
 		batch.end();
 		
-		renderer.setProjectionMatrix(camera.combined);
-		renderer.begin(ShapeType.Filled);
-		renderer.setColor(1, 0, 0, 1);
-		for(Drawable d: drawables) {
-			renderer.rect(d.x, d.y, 2, 2);
+		if(removed.size() > 0) {
+			Iterator<Drawable> iter = drawables.iterator();
+			while(iter.hasNext()) {
+				if(removed.contains(iter.next())) {
+					iter.remove();
+				}
+			}
 		}
-		renderer.end();
+		
+//		renderer.setProjectionMatrix(camera.combined);
+//		renderer.begin(ShapeType.Filled);
+//		renderer.setColor(1, 0, 0, 1);
+//		for(Drawable d: drawables) {
+//			renderer.rect(d.x, d.y, 2, 2);
+//		}
+//		renderer.end();
 	}
 
-	public void addImage (String name, String imageName, int x, int y, int z) {
-		drawables.add(new ImageDrawable(name, imageName, x, y, z));
-	}
-	
-	public void addAnimation(String name, String animationName, int x, int y, int z) {
-		drawables.add(new AnimationDrawable(name, animationName, x, y, z));
+	public void addDrawable(Drawable drawable) {
+		drawables.add(drawable);
 	}
 	
 	public void removeDrawable(String name) {
 		Iterator<Drawable> iter = drawables.iterator();
 		while(iter.hasNext()) {
 			if(iter.next().name.equals(name)) {
-				iter.remove();
+				iter.remove();	
+				break;
 			}
 		}
 	}
@@ -99,5 +108,17 @@ public class Game {
 			}
 		}
 		return null;
+	}
+
+	public void removeDrawable (Drawable drawable) {
+		removed.add(drawable);
+	}
+
+	public SpriteBatch getBatch () {
+		return batch;
+	}
+	
+	public ShapeRenderer getRenderer() {
+		return renderer;
 	}
 }

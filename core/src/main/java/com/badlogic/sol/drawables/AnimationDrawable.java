@@ -6,15 +6,12 @@ import com.badlogic.sol.Assets;
 import com.badlogic.sol.Drawable;
 
 public class AnimationDrawable extends Drawable {
-	public String animationName;
+	String animationName;
 	float stateTime;
 	
-	public AnimationDrawable (String name, String animationName, int startX, int startY, int z) {
-		super(name);
+	public AnimationDrawable (String name, String animationName, int x, int y, int z) {
+		super(name, x, y, z);
 		this.animationName = animationName;
-		this.x = startX;
-		this.y = startY;
-		this.z = z;
 	}
 
 	@Override
@@ -22,5 +19,10 @@ public class AnimationDrawable extends Drawable {
 		stateTime += deltaTime;
 		TextureRegion region = Assets.getAnimation(animationName).getKeyFrame(stateTime, true);
 		batch.draw(region, x, y);
+	}
+	
+	public void setAnimation(String animationName) {
+		this.animationName = animationName;
+		this.stateTime = 0;
 	}
 }

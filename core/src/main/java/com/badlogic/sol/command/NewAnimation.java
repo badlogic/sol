@@ -2,6 +2,7 @@ package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
 import com.badlogic.sol.Game;
+import com.badlogic.sol.drawables.AnimationDrawable;
 
 public class NewAnimation implements Command {
 	String name;
@@ -18,7 +19,7 @@ public class NewAnimation implements Command {
 
 	@Override
 	public void update (float delta) {
-		Game.ctx.addAnimation(name, animationName, x, y, z);
+		Game.ctx.addDrawable(new AnimationDrawable(name, animationName, x, y, z));
 	}
 
 	@Override

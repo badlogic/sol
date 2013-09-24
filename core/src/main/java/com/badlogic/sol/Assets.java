@@ -1,13 +1,17 @@
 package com.badlogic.sol;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.ObjectMap;
 
 public class Assets {
 	static ObjectMap<String, Animation> animations = new ObjectMap<String, Animation>();
 	static ObjectMap<String, Texture> images = new ObjectMap<String, Texture>();
+	public static BitmapFont font;
 	
 	public static void load() {
 		animations.put("idle-right", loadAnim("stef-idle.png", 32, 64, 0.5f, false));
@@ -15,8 +19,14 @@ public class Assets {
 		animations.put("walk-right", loadAnim("stef-walk.png", 32, 64, 0.5f, false));
 		animations.put("walk-left", loadAnim("stef-walk.png", 32, 64, 0.5f, true));
 		animations.put("back", loadAnim("stef-back.png", 32, 64, 0.5f, false));
+		animations.put("front", loadAnim("stef-front.png", 32, 64, 0.5f, false));
 		
 		images.put("outdoor", loadImage("outdoor.png"));
+		
+		images.put("supermario", loadImage("supermario.png"));
+		images.put("mushroom", loadImage("mushroom.png"));
+		
+		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}
 	
 	private static Texture loadImage(String fileName) {

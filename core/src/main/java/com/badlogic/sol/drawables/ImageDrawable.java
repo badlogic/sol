@@ -8,11 +8,8 @@ public class ImageDrawable extends Drawable {
 	String imageName;
 	
 	public ImageDrawable(String name, String imageName, int x, int y, int z) {
-		super(name);
+		super(name, x, y, z);
 		this.imageName = imageName;
-		this.x = x;
-		this.y = y;
-		this.z = z;
 	}
 	
 	@Override
