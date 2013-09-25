@@ -8,17 +8,17 @@ import com.badlogic.sol.Game;
 import com.badlogic.sol.Inventory;
 
 /**
- * Checks if a set of items is in the inventory. If not the given
+ * Checks if a set of items is in the inventory. If so, the given
  * list of commands will be executed, otherwise execution continues
  * as usual.
  * @author badlogic
  *
  */
-public class CheckItems implements Command {
+public class IfHas implements Command {
 	Set<String> neededItems;
 	Array<Command> commands;
 	
-	public CheckItems(Set<String> neededItems, Array<Command> commands) {
+	public IfHas(Set<String> neededItems, Array<Command> commands) {
 		this.neededItems = neededItems;
 		this.commands = commands;
 	}
@@ -32,12 +32,14 @@ public class CheckItems implements Command {
 				break;
 			}
 		}
-		if(!hasAll) {
+		if(hasAll) {
 			Game.ctx.getScene().commands.clear();
 			// need to add a nop as the while loop in Scene#update() will kill the
 			// first command we are about to add
 			Game.ctx.getScene().commands.add(new Nop());
-			Game.ctx.getScene().commands.addAll(commands);
+			for(Command c: commands) {
+				Game.ctx.getScene().commands.add(c.copy());
+			}
 		}
 	}
 

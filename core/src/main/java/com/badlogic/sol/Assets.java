@@ -27,6 +27,12 @@ public class Assets {
 		animations.put("bird", loadAnim("outdoor/bird.png", 16, 16, 2, false));
 		animations.put("bird-fly", loadAnim("outdoor/bird-fly.png", 16, 16, 0.3f, false));
 		
+		// entrance
+		images.put("entrance", loadImage("entrance/entrance.png"));
+		images.put("door", loadImage("entrance/door.png"));
+		images.put("opendoor", loadImage("entrance/opendoor.png"));
+		animations.put("panel", loadAnim("entrance/panel.png", 7, 11, 1, false));
+		
 		// mario
 		images.put("supermario", loadImage("mario/supermario.png"));
 		images.put("mushroom", loadImage("mario/mushroom.png"));

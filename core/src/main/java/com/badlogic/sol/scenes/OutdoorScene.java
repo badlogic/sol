@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.sol.Inventory;
 import com.badlogic.sol.Scene;
 import com.badlogic.sol.Trigger;
-import com.badlogic.sol.command.CheckItems;
+import com.badlogic.sol.command.IfHasNot;
 import com.badlogic.sol.command.AddItem;
 import com.badlogic.sol.command.MoveTo;
 import com.badlogic.sol.command.MoveToAnim;
@@ -25,13 +25,13 @@ public class OutdoorScene extends Scene {
 		if(!Inventory.has("bird")) add(new Animated("bird", "bird", 71, 177, 1));
 		
 		// intro
-//		add(new Fade(Color.WHITE, 1, true));
-//		add(new MoveToAnim("stef", "walk", 220, 80, 64));
-//		add(new SetAnimation("stef", "front"));
-//		add(new Text("Dum Di Dum...", Color.BLACK, 2.5f, 250, 186));
-//		add(new Wait(2.5f));
-//		add(new SetAnimation("stef", "front"));		
-//		add(new Text("Cold out here", Color.BLACK, 2.5f, 250, 186));
+		add(new Fade(Color.WHITE, 1, true));
+		add(new MoveToAnim("stef", "walk", 220, 80, 64));
+		add(new SetAnimation("stef", "front"));
+		add(new Text("Dum Di Dum...", Color.BLACK, 2.5f, 250, 186));
+		add(new Wait(2.5f));
+		add(new SetAnimation("stef", "front"));		
+		add(new Text("Cold out here", Color.BLACK, 2.5f, 250, 186));
 		
 		// bird trigger
 		if(!Inventory.has("bird")) { 
@@ -61,9 +61,19 @@ public class OutdoorScene extends Scene {
 				.add(new Text("I hope he cleans that soon", Color.BLACK, 2f, 220, 186))
 		);
 		
+		// doorbell trigger
+		add(new Trigger("doorbell-trigger", 123, 112, 134, 126)
+				.add(new MoveToAnim("stef", "walk", 100, 80, 64))
+				.add(new SetAnimation("stef", "back"))
+				.add(new Text("Ding Dong", Color.BLACK, 1f, 220, 186))
+				.add(new Wait(1f))
+				.add(new SetAnimation("stef", "front"))
+				.add(new Text("Hihi", Color.BLACK, 1f, 220, 186))			
+		);
+		
 		// door trigger
 		add(new Trigger("door-trigger", 86, 81, 121, 155)
-			.add(new CheckItems(set("bird"), array(
+			.add(new IfHasNot(set("bird"), array(
 				new New(new Text("That bird has to go!", Color.BLACK, 2f, 220, 186))
 			)))
 			.add(new MoveToAnim("stef", "walk", 92, 80, 64))
@@ -71,7 +81,7 @@ public class OutdoorScene extends Scene {
 			.add(new Text("Home Sweet Home", Color.BLACK, 2, 80, 186))
 			.add(new Fade(Color.WHITE, 1, false))
 			.add(new Wait(1))
-			.add(new NextScene(new MarioScene()))
+			.add(new NextScene(new EntranceScene()))
 		);
 	}
 }
