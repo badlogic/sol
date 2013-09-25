@@ -1,14 +1,14 @@
-package com.badlogic.sol.drawables;
+package com.badlogic.sol.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.sol.Drawable;
+import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
 
-public class Fade extends Drawable {
+public class Fade extends Entity {
 	Color color;
 	float duration;
 	boolean isFadeIn;
@@ -39,5 +39,10 @@ public class Fade extends Drawable {
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		
 		Game.ctx.getBatch().begin();
+	}
+
+	@Override
+	public Entity copy () {
+		return new Fade(color, duration, isFadeIn);
 	}
 }

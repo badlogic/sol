@@ -1,13 +1,13 @@
 package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
-import com.badlogic.sol.Drawable;
+import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
 
 public class New implements Command {
-	Drawable drawable;
+	Entity drawable;
 	
-	public New(Drawable drawable) {
+	public New(Entity drawable) {
 		this.drawable = drawable;
 	}
 	
@@ -19,5 +19,10 @@ public class New implements Command {
 	@Override
 	public boolean isDone () {
 		return true;
+	}
+
+	@Override
+	public Command copy () {
+		return new New(drawable.copy());
 	}
 }

@@ -2,7 +2,7 @@ package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
 import com.badlogic.sol.Game;
-import com.badlogic.sol.drawables.AnimationDrawable;
+import com.badlogic.sol.entity.Animated;
 
 public class SetAnimation implements Command {
 	String name;
@@ -16,11 +16,17 @@ public class SetAnimation implements Command {
 	
 	@Override
 	public void update (float delta) {
-		((AnimationDrawable)Game.ctx.getDrawable(name)).setAnimation(animationName);
+		((Animated)Game.ctx.getDrawable(name)).setAnimation(animationName);
 	}
 
 	@Override
 	public boolean isDone () {
 		return true;
+	}
+
+
+	@Override
+	public Command copy () {
+		return new SetAnimation(name, animationName);
 	}
 }

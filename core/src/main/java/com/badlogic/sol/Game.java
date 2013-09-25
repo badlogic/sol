@@ -13,16 +13,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.sol.drawables.AnimationDrawable;
-import com.badlogic.sol.drawables.ImageDrawable;
-import com.badlogic.sol.drawables.TextDrawable;
+import com.badlogic.sol.entity.Animated;
+import com.badlogic.sol.entity.Image;
+import com.badlogic.sol.entity.Text;
 
 public class Game {
 	public static Game ctx;
 	SpriteBatch batch;
 	OrthographicCamera camera;
-	Array<Drawable> drawables = new Array<Drawable>();
-	Set<Drawable> removed = new HashSet<Drawable>();
+	Array<Entity> drawables = new Array<Entity>();
+	Set<Entity> removed = new HashSet<Entity>();
 	Scene scene;
 	Vector3 v = new Vector3();
 	ShapeRenderer renderer;
@@ -48,9 +48,9 @@ public class Game {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		scene.update(deltaTime);
 		
-		drawables.sort(new Comparator<Drawable>() {
+		drawables.sort(new Comparator<Entity>() {
 			@Override
-			public int compare (Drawable o1, Drawable o2) {
+			public int compare (Entity o1, Entity o2) {
 				return o1.z - o2.z;
 			}
 		});
@@ -60,15 +60,16 @@ public class Game {
 		renderer.setProjectionMatrix(camera.combined);
 		
 		batch.begin();
-		for(Drawable d: drawables) {
+		for(Entity d: drawables) {
 			d.draw(deltaTime, batch);
 		}
 		camera.unproject(v.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+		Assets.font.setColor(Color.RED);
 		Assets.font.draw(batch, (int)v.x + ", " + (int)v.y, 0, 12);
 		batch.end();
 		
 		if(removed.size() > 0) {
-			Iterator<Drawable> iter = drawables.iterator();
+			Iterator<Entity> iter = drawables.iterator();
 			while(iter.hasNext()) {
 				if(removed.contains(iter.next())) {
 					iter.remove();
@@ -85,12 +86,12 @@ public class Game {
 //		renderer.end();
 	}
 
-	public void addDrawable(Drawable drawable) {
+	public void addDrawable(Entity drawable) {
 		drawables.add(drawable);
 	}
 	
 	public void removeDrawable(String name) {
-		Iterator<Drawable> iter = drawables.iterator();
+		Iterator<Entity> iter = drawables.iterator();
 		while(iter.hasNext()) {
 			if(iter.next().name.equals(name)) {
 				iter.remove();	
@@ -99,18 +100,26 @@ public class Game {
 		}
 	}
 
-	public Drawable getDrawable (String name) {
-		Iterator<Drawable> iter = drawables.iterator();
+	public Entity getDrawable (String name) {
+		Iterator<Entity> iter = drawables.iterator();
 		while(iter.hasNext()) {
-			Drawable d = iter.next();
+			Entity d = iter.next();
 			if(d.name.equals(name)) {
 				return d;
 			}
 		}
 		return null;
 	}
+	
+	public int getX() {
+		return (int)v.x;
+	}
+	
+	public int getY() {
+		return (int)v.y;
+	}
 
-	public void removeDrawable (Drawable drawable) {
+	public void removeDrawable (Entity drawable) {
 		removed.add(drawable);
 	}
 

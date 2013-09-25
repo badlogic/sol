@@ -19,4 +19,9 @@ public class Wait implements Command {
 	public boolean isDone () {
 		return stateTime >= duration;
 	}
+
+	@Override
+	public Command copy () {
+		return new Wait(duration);
+	}
 }

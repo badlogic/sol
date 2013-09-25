@@ -14,6 +14,7 @@ public class Assets {
 	public static BitmapFont font;
 	
 	public static void load() {
+		// stef
 		animations.put("idle-right", loadAnim("stef-idle.png", 32, 64, 0.5f, false));
 		animations.put("idle-left", loadAnim("stef-idle.png", 32, 64, 0.5f, true));
 		animations.put("walk-right", loadAnim("stef-walk.png", 32, 64, 0.5f, false));
@@ -21,7 +22,10 @@ public class Assets {
 		animations.put("back", loadAnim("stef-back.png", 32, 64, 0.5f, false));
 		animations.put("front", loadAnim("stef-front.png", 32, 64, 0.5f, false));
 		
+		// outdoor
 		images.put("outdoor", loadImage("outdoor.png"));
+		animations.put("bird", loadAnim("bird.png", 16, 16, 2, false));
+		animations.put("bird-fly", loadAnim("bird-fly.png", 16, 16, 0.3f, false));
 		
 		images.put("supermario", loadImage("supermario.png"));
 		images.put("mushroom", loadImage("mushroom.png"));
@@ -41,7 +45,7 @@ public class Assets {
 				r.flip(true, false);
 			}
 		}
-		return new Animation(0.5f, frames);
+		return new Animation(frameDuration, frames);
 	}
 	
 	public static Animation getAnimation(String name) {

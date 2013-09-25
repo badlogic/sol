@@ -4,16 +4,19 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.sol.Command;
 import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
+import com.badlogic.sol.entity.Animated;
 
-public class MoveTo implements Command {
+public class MoveToAnim implements Command {
 	Entity d;
 	String name;
+	String baseAnimName;
 	int x, y;
 	float speed;
 	Vector2 v = new Vector2();
 	
-	public MoveTo(String name, int x, int y, float speed) {
+	public MoveToAnim(String name, String baseAnimName, int x, int y, float speed) {
 		this.name = name;
+		this.baseAnimName = baseAnimName;
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -21,7 +24,13 @@ public class MoveTo implements Command {
 	
 	@Override
 	public void update (float delta) {
-		if(d == null) d = Game.ctx.getDrawable(name);
+		if(d == null) {
+			d = Game.ctx.getDrawable(name);
+			String dir = d.x < x? "-right": "-left"; 
+			if(d instanceof Animated) {
+				((Animated)d).setAnimation(baseAnimName + dir);
+			}
+		}
 		v.set(x - d.x, y - d.y).nor().scl(delta * speed);
 		d.x = d.x + v.x;
 		d.y = d.y + v.y;
@@ -34,6 +43,6 @@ public class MoveTo implements Command {
 
 	@Override
 	public Command copy () {
-		return new MoveTo(name, x, y, speed);
+		return new MoveToAnim(name, baseAnimName, x, y, speed);
 	}
 }
