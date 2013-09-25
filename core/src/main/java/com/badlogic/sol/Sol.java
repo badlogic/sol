@@ -2,8 +2,7 @@
 package com.badlogic.sol;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.sol.scenes.EntranceScene;
-import com.badlogic.sol.scenes.OutdoorScene;
+import com.badlogic.sol.scenes.MarioScene;
 
 
 public class Sol extends ApplicationAdapter {
@@ -12,7 +11,7 @@ public class Sol extends ApplicationAdapter {
 	@Override
 	public void create () {
 		game = new Game();
-		game.setScene(new EntranceScene());
+		game.setScene(new MarioScene());
 	}
 
 	@Override

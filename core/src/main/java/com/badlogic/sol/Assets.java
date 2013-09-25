@@ -21,6 +21,8 @@ public class Assets {
 		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.5f, true));
 		animations.put("back", loadAnim("stef/stef-back.png", 32, 64, 0.5f, false));
 		animations.put("front", loadAnim("stef/stef-front.png", 32, 64, 0.5f, false));
+		animations.put("kick-right", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, false));
+		animations.put("kick-left", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, true));
 		
 		// outdoor
 		images.put("outdoor", loadImage("outdoor/outdoor.png"));
@@ -35,6 +37,8 @@ public class Assets {
 		
 		// mario
 		images.put("supermario", loadImage("mario/supermario.png"));
+		animations.put("goomba", loadAnim("mario/goomba.png", 16, 16, 0.5f, false));
+		animations.put("goomba-dead", loadAnim("mario/goomba-dead.png", 16, 16, 0.1f, false));
 		images.put("mushroom", loadImage("mario/mushroom.png"));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);

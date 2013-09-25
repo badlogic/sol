@@ -12,16 +12,22 @@ import com.badlogic.sol.entity.Animated;
 public class SetAnimation implements Command {
 	String name;
 	String animationName;
+	boolean looped;
 	
 	public SetAnimation(String name, String animationName) {
 		this.name = name;
 		this.animationName = animationName;
 	}
 	
+	public SetAnimation(String name, String animationName, boolean looped) {
+		this.name = name;
+		this.animationName = animationName;
+		this.looped = looped;
+	}
 	
 	@Override
 	public void update (float delta) {
-		((Animated)Game.ctx.getDrawable(name)).setAnimation(animationName);
+		((Animated)Game.ctx.getDrawable(name)).setAnimation(animationName, looped);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class MoveToAnim implements Command {
 			d = Game.ctx.getDrawable(name);
 			String dir = d.x < x? "-right": "-left"; 
 			if(d instanceof Animated) {
-				((Animated)d).setAnimation(baseAnimName + dir);
+				((Animated)d).setAnimation(baseAnimName + dir, true);
 			}
 		}
 		v.set(x - d.x, y - d.y).nor().scl(delta * speed);

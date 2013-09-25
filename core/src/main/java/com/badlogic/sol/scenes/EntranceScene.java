@@ -53,6 +53,7 @@ public class EntranceScene extends Scene {
 			.add(new Text("It's even colder outside!", Color.BLACK, 2, 100, 186))
 			.add(new Wait(2))
 			.add(new Text("Also, birds", Color.BLACK, 2, 60, 186))
+			.add(new Wait(2))
 		);
 		
 		// washingroom trigger
@@ -120,7 +121,8 @@ public class EntranceScene extends Scene {
 			)))
 			.add(new IfHas(set("panel"), array(
 				new SetAnimation("stef", "front"),
-				new New(new Text("It's broken, no use in trying", Color.BLACK, 2, 120, 186))
+				new New(new Text("It's broken, no use in trying", Color.BLACK, 2, 120, 186)),
+				new Wait(2)
 			)))
 		);
 
