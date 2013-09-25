@@ -1,32 +1,32 @@
 package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
+import com.badlogic.sol.Inventory;
 
 /**
- * Waits for n seconds
+ * Adds the item to the inventory
  * @author badlogic
  *
  */
-public class Wait implements Command {
-	float duration;
-	float stateTime;
+public class AddItem implements Command {
+	String item;
 	
-	public Wait(float duration) {
-		this.duration = duration;
+	public AddItem(String item) {
+		this.item = item;
 	}
-
+	
 	@Override
 	public void update (float delta) {
-		stateTime += delta;
+		Inventory.add(item);
 	}
 
 	@Override
 	public boolean isDone () {
-		return stateTime >= duration;
+		return true;
 	}
 
 	@Override
 	public Command copy () {
-		return new Wait(duration);
+		return this;
 	}
 }

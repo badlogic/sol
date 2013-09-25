@@ -1,25 +1,24 @@
 package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
-import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
+import com.badlogic.sol.Scene;
 
 /**
- * Creates a new {@link Entity} and adds it to 
- * the {@link Game}
+ * Switches to the next scene
  * @author badlogic
  *
  */
-public class New implements Command {
-	Entity drawable;
+public class NextScene implements Command {
+	Scene scene;
 	
-	public New(Entity drawable) {
-		this.drawable = drawable;
+	public NextScene(Scene scene) {
+		this.scene = scene;
 	}
 	
 	@Override
 	public void update (float delta) {
-		Game.ctx.addDrawable(drawable);
+		Game.ctx.setScene(scene);
 	}
 
 	@Override
@@ -29,6 +28,7 @@ public class New implements Command {
 
 	@Override
 	public Command copy () {
-		return new New(drawable.copy());
+		return this;
 	}
+
 }

@@ -1,14 +1,16 @@
 package com.badlogic.sol;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.sol.command.New;
 
 public class Scene {
-	protected Array<Command> commands = new Array<Command>();
-	protected Array<Trigger> triggers = new Array<Trigger>();
+	public Array<Command> commands = new Array<Command>();
+	public Array<Trigger> triggers = new Array<Trigger>();
 	
 	public void update(float deltaTime) {
 		while(commands.size > 0) {
@@ -53,5 +55,28 @@ public class Scene {
 				break;
 			}
 		}
+	}
+	
+	public static Set<String> set(String ... strings) {
+		Set<String> set = new HashSet<String>();
+		for(String s: strings) {
+			set.add(s);
+		}
+		return set;
+	}
+	
+	public static Array<Command> array(Command ... cmds) {
+		Array<Command> array = new Array<Command>();
+		for(Command cmd: cmds) {
+			array.add(cmd);
+		}
+		return array;
+	}
+
+	public Trigger getTrigger (String triggerName) {
+		for(Trigger t: triggers) {
+			if(t.name.equals(triggerName)) return t;
+		}
+		return null;
 	}
 }

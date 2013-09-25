@@ -1,10 +1,15 @@
 package com.badlogic.sol.scenes;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.sol.Inventory;
 import com.badlogic.sol.Scene;
 import com.badlogic.sol.Trigger;
+import com.badlogic.sol.command.CheckItems;
+import com.badlogic.sol.command.AddItem;
 import com.badlogic.sol.command.MoveTo;
 import com.badlogic.sol.command.MoveToAnim;
+import com.badlogic.sol.command.New;
+import com.badlogic.sol.command.NextScene;
 import com.badlogic.sol.command.SetAnimation;
 import com.badlogic.sol.command.Wait;
 import com.badlogic.sol.entity.Animated;
@@ -14,39 +19,59 @@ import com.badlogic.sol.entity.Text;
 
 public class OutdoorScene extends Scene {
 	public OutdoorScene() {
+		// setup scene
 		add(new Image("background", "outdoor", 0, 0, 0));
-		add(new Animated("bird", "bird", 71, 177, 1));
 		add(new Animated("stef", "idle-left", 320, 80, 10));
+		if(!Inventory.has("bird")) add(new Animated("bird", "bird", 71, 177, 1));
 		
 		// intro
-		add(new Fade(Color.WHITE, 1, true));
-		add(new MoveToAnim("stef", "walk", 220, 80, 64));
-		add(new SetAnimation("stef", "front"));
-		add(new Text("Dum Di Dum...", Color.BLACK, 2.5f, 250, 186));
-		add(new Wait(2.5f));
-		add(new SetAnimation("stef", "front"));		
-		add(new Text("Cold out here", Color.BLACK, 2.5f, 250, 186));
+//		add(new Fade(Color.WHITE, 1, true));
+//		add(new MoveToAnim("stef", "walk", 220, 80, 64));
+//		add(new SetAnimation("stef", "front"));
+//		add(new Text("Dum Di Dum...", Color.BLACK, 2.5f, 250, 186));
+//		add(new Wait(2.5f));
+//		add(new SetAnimation("stef", "front"));		
+//		add(new Text("Cold out here", Color.BLACK, 2.5f, 250, 186));
 		
 		// bird trigger
-		add(new Trigger("bird-trigger", 70, 177, 87, 195)
-				.add(new MoveToAnim("stef", "walk", 60, 80, 64))
-				.add(new SetAnimation("stef", "back"))
-				.add(new Wait(1))
-				.add(new Text("Away, stupid bird!", Color.BLACK, 2f, 71, 220))
-				.add(new Wait(0.5f))
-				.add(new SetAnimation("bird", "bird-fly"))
-				.add(new MoveTo("bird", 200, 241, 80))
-				.add(new SetAnimation("stef", "front"))
-				.disable()
-		);
+		if(!Inventory.has("bird")) { 
+			add(new Trigger("bird-trigger", 70, 177, 87, 195)
+					.add(new MoveToAnim("stef", "walk", 60, 80, 64))
+					.add(new SetAnimation("stef", "back"))
+					.add(new Wait(0.2f))
+					.add(new Text("Away, stupid bird!", Color.BLACK, 2f, 71, 220))
+					.add(new Wait(0.2f))
+					.add(new SetAnimation("bird", "bird-fly"))
+					.add(new MoveTo("bird", 200, 241, 80))
+					.add(new SetAnimation("stef", "front"))
+					.add(new Text("And stay away!", Color.BLACK, 2f, 71, 220))
+					.add(new AddItem("bird"))
+					.disable()
+			);
+		}
 		
 		// window trigger
 		add(new Trigger("window-trigger", 183, 118, 226, 152)
 				.add(new MoveToAnim("stef", "walk", 200, 80, 64))
 				.add(new SetAnimation("stef", "back"))
-				.add(new Wait(1))
+				.add(new Wait(0.2f))
 				.add(new SetAnimation("stef", "back"))
+				.add(new Wait(0.5f))
+				.add(new SetAnimation("stef", "front"))
 				.add(new Text("I hope he cleans that soon", Color.BLACK, 2f, 220, 186))
+		);
+		
+		// door trigger
+		add(new Trigger("door-trigger", 86, 81, 121, 155)
+			.add(new CheckItems(set("bird"), array(
+				new New(new Text("That bird has to go!", Color.BLACK, 2f, 220, 186))
+			)))
+			.add(new MoveToAnim("stef", "walk", 92, 80, 64))
+			.add(new SetAnimation("stef", "back"))
+			.add(new Text("Home Sweet Home", Color.BLACK, 2, 80, 186))
+			.add(new Fade(Color.WHITE, 1, false))
+			.add(new Wait(1))
+			.add(new NextScene(new MarioScene()))
 		);
 	}
 }

@@ -4,6 +4,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.sol.command.New;
 
+/**
+ * Rectangular area that when touched will trigger a list of commands to be
+ * executed
+ * @author badlogic
+ *
+ */
 public class Trigger {
 	public String name;
 	public boolean disabled;

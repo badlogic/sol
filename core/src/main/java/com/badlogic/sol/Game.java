@@ -13,9 +13,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.sol.entity.Animated;
-import com.badlogic.sol.entity.Image;
-import com.badlogic.sol.entity.Text;
 
 public class Game {
 	public static Game ctx;
@@ -30,6 +27,7 @@ public class Game {
 	public Game() {
 		ctx = this;
 		Assets.load();
+		Inventory.clear();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 320, 240);
 		batch = new SpriteBatch();
@@ -129,5 +127,9 @@ public class Game {
 	
 	public ShapeRenderer getRenderer() {
 		return renderer;
+	}
+
+	public Scene getScene () {
+		return scene;
 	}
 }

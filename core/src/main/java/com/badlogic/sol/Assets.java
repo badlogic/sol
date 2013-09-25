@@ -15,20 +15,21 @@ public class Assets {
 	
 	public static void load() {
 		// stef
-		animations.put("idle-right", loadAnim("stef-idle.png", 32, 64, 0.5f, false));
-		animations.put("idle-left", loadAnim("stef-idle.png", 32, 64, 0.5f, true));
-		animations.put("walk-right", loadAnim("stef-walk.png", 32, 64, 0.5f, false));
-		animations.put("walk-left", loadAnim("stef-walk.png", 32, 64, 0.5f, true));
-		animations.put("back", loadAnim("stef-back.png", 32, 64, 0.5f, false));
-		animations.put("front", loadAnim("stef-front.png", 32, 64, 0.5f, false));
+		animations.put("idle-right", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, false));
+		animations.put("idle-left", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, true));
+		animations.put("walk-right", loadAnim("stef/stef-walk.png", 32, 64, 0.5f, false));
+		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.5f, true));
+		animations.put("back", loadAnim("stef/stef-back.png", 32, 64, 0.5f, false));
+		animations.put("front", loadAnim("stef/stef-front.png", 32, 64, 0.5f, false));
 		
 		// outdoor
-		images.put("outdoor", loadImage("outdoor.png"));
-		animations.put("bird", loadAnim("bird.png", 16, 16, 2, false));
-		animations.put("bird-fly", loadAnim("bird-fly.png", 16, 16, 0.3f, false));
+		images.put("outdoor", loadImage("outdoor/outdoor.png"));
+		animations.put("bird", loadAnim("outdoor/bird.png", 16, 16, 2, false));
+		animations.put("bird-fly", loadAnim("outdoor/bird-fly.png", 16, 16, 0.3f, false));
 		
-		images.put("supermario", loadImage("supermario.png"));
-		images.put("mushroom", loadImage("mushroom.png"));
+		// mario
+		images.put("supermario", loadImage("mario/supermario.png"));
+		images.put("mushroom", loadImage("mario/mushroom.png"));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}

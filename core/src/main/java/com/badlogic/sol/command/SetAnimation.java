@@ -4,6 +4,11 @@ import com.badlogic.sol.Command;
 import com.badlogic.sol.Game;
 import com.badlogic.sol.entity.Animated;
 
+/**
+ * Sets the animation on an {@link Animated} entity.
+ * @author badlogic
+ *
+ */
 public class SetAnimation implements Command {
 	String name;
 	String animationName;

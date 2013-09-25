@@ -6,6 +6,12 @@ import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
 import com.badlogic.sol.entity.Animated;
 
+/**
+ * Moves an entity to a specific point at the given speed. Sets the animation,
+ * appending -left or -right depending on which way the entity has to move.
+ * @author badlogic
+ *
+ */
 public class MoveToAnim implements Command {
 	Entity d;
 	String name;

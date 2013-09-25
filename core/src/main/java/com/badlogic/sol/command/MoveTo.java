@@ -5,6 +5,11 @@ import com.badlogic.sol.Command;
 import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
 
+/**
+ * Moves an entity to the position at the given speed
+ * @author badlogic
+ *
+ */
 public class MoveTo implements Command {
 	Entity d;
 	String name;
