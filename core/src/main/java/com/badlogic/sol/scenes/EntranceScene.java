@@ -27,10 +27,10 @@ public class EntranceScene extends Scene {
 		add(new Animated("panel", "panel", 68, 120, 0));
 		
 		// intro
-//		add(new Fade(Color.WHITE, 1, true));		
-//		add(new SetAnimation("stef", "front"));
-//		add(new Text("Brrr, cold", Color.BLACK, 2f, 50, 186));
-//		add(new Wait(2f));
+		add(new Fade(Color.WHITE, 1, true));		
+		add(new SetAnimation("stef", "front"));
+		add(new Text("I feel stinky", Color.BLACK, 2f, 50, 186));
+		add(new Wait(2f));
 		
 		// books trigger
 		add(new Trigger("books", 242, 80, 283, 145)
@@ -140,7 +140,7 @@ public class EntranceScene extends Scene {
 				new New(new Text("Got to turn up the heat first", Color.BLACK, 2, 160, 186)),
 				new Wait(2)
 			)))
-			.add(new Text("I'm stinky", Color.BLACK, 2, 160, 186))
+			.add(new Text("To the shower!", Color.BLACK, 2, 160, 186))
 			.add(new Wait(2))
 			.add(new Image("opendoor", "opendoor", 190, 80, 1))
 			.add(new Wait(1))
@@ -158,6 +158,10 @@ public class EntranceScene extends Scene {
 			.add(new Text("*Scrub Scrub*", Color.MAGENTA, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("*Towel Towel*", Color.MAGENTA, 2, 157, 186))
+			.add(new Wait(2))
+			.add(new Text("*Cream Cream*", Color.MAGENTA, 2, 157, 186))
+			.add(new Wait(2))
+			.add(new Text("*More Cream*", Color.MAGENTA, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("*Puts on Clothes*", Color.MAGENTA, 2, 157, 186))
 			.add(new Wait(2))

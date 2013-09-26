@@ -39,6 +39,7 @@ public class Game {
 			@Override
 			public boolean touchDown (int screenX, int screenY, int pointer, int button) {
 				justTouched[pointer] = true;
+				camera.unproject(v.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 				return false;
 			}
 
@@ -77,7 +78,7 @@ public class Game {
 		for(Entity d: drawables) {
 			d.draw(deltaTime, batch);
 		}
-		camera.unproject(v.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+		
 		Assets.font.setColor(Color.RED);
 		Assets.font.draw(batch, (int)v.x + ", " + (int)v.y, 0, 12);
 		batch.end();
