@@ -17,8 +17,8 @@ public class Assets {
 		// stef
 		animations.put("idle-right", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, false));
 		animations.put("idle-left", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, true));
-		animations.put("walk-right", loadAnim("stef/stef-walk.png", 32, 64, 0.5f, false));
-		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.5f, true));
+		animations.put("walk-right", loadAnim("stef/stef-walk.png", 32, 64, 0.3f, false));
+		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.3f, true));
 		animations.put("back", loadAnim("stef/stef-back.png", 32, 64, 0.5f, false));
 		animations.put("front", loadAnim("stef/stef-front.png", 32, 64, 0.5f, false));
 		animations.put("kick-right", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, false));
@@ -40,6 +40,9 @@ public class Assets {
 		animations.put("goomba", loadAnim("mario/goomba.png", 16, 16, 0.5f, false));
 		animations.put("goomba-dead", loadAnim("mario/goomba-dead.png", 16, 16, 0.1f, false));
 		images.put("mushroom", loadImage("mario/mushroom.png"));
+		
+		// bowser
+		animations.put("bowser", loadAnim("bowser/bowser.png", 32, 32, 0.3f, false));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}

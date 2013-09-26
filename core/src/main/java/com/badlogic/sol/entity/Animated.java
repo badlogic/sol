@@ -6,7 +6,7 @@ import com.badlogic.sol.Assets;
 import com.badlogic.sol.Entity;
 
 public class Animated extends Entity {
-	String animationName;
+	public String animationName;
 	float stateTime;
 	boolean looping = true;
 	
@@ -29,6 +29,7 @@ public class Animated extends Entity {
 	}
 	
 	public void setAnimation(String animationName, boolean looped) {
+		if(this.animationName.equals(animationName) && this.looping == looped) return;
 		this.animationName = animationName;
 		this.stateTime = 0;
 		this.looping = looped;

@@ -1,6 +1,7 @@
 package com.badlogic.sol.command;
 
 import com.badlogic.sol.Command;
+import com.badlogic.sol.Entity;
 import com.badlogic.sol.Game;
 
 public class SetZ implements Command {
@@ -14,7 +15,7 @@ public class SetZ implements Command {
 
 	@Override
 	public void update (float delta) {
-		Game.ctx.getDrawable(name).z = z;
+		Game.ctx.getEntity(name, Entity.class).z = z;
 	}
 
 	@Override

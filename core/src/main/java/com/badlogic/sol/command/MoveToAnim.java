@@ -13,7 +13,7 @@ import com.badlogic.sol.entity.Animated;
  *
  */
 public class MoveToAnim implements Command {
-	Entity d;
+	Animated d;
 	String name;
 	String baseAnimName;
 	int x, y;
@@ -31,11 +31,9 @@ public class MoveToAnim implements Command {
 	@Override
 	public void update (float delta) {
 		if(d == null) {
-			d = Game.ctx.getDrawable(name);
+			d = Game.ctx.getEntity(name, Animated.class);
 			String dir = d.x < x? "-right": "-left"; 
-			if(d instanceof Animated) {
-				((Animated)d).setAnimation(baseAnimName + dir, true);
-			}
+			d.setAnimation(baseAnimName + dir, true);
 		}
 		v.set(x - d.x, y - d.y).nor().scl(delta * speed);
 		d.x = d.x + v.x;

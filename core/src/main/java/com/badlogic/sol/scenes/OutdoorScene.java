@@ -41,7 +41,7 @@ public class OutdoorScene extends Scene {
 					.add(new Wait(0.2f))
 					.add(new Text("Away, stupid bird!", Color.BLACK, 2f, 71, 220))
 					.add(new Wait(0.2f))
-					.add(new SetAnimation("bird", "bird-fly"))
+					.add(new SetAnimation("bird", "bird-fly", true))
 					.add(new MoveTo("bird", 200, 241, 80))
 					.add(new SetAnimation("stef", "front"))
 					.add(new Text("And stay away!", Color.BLACK, 2f, 71, 220))

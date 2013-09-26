@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,12 +18,14 @@ import com.badlogic.gdx.utils.Array;
 public class Game {
 	public static Game ctx;
 	SpriteBatch batch;
-	OrthographicCamera camera;
+	public OrthographicCamera camera;
 	Array<Entity> drawables = new Array<Entity>();
 	Set<Entity> removed = new HashSet<Entity>();
 	Scene scene;
 	Vector3 v = new Vector3();
 	ShapeRenderer renderer;
+	public boolean[] justTouched = new boolean[10];
+	public boolean[] justLifted = new boolean[10];
 	
 	public Game() {
 		ctx = this;
@@ -32,6 +35,19 @@ public class Game {
 		camera.setToOrtho(false, 320, 240);
 		batch = new SpriteBatch();
 		renderer = new ShapeRenderer();
+		Gdx.input.setInputProcessor(new InputAdapter() {
+			@Override
+			public boolean touchDown (int screenX, int screenY, int pointer, int button) {
+				justTouched[pointer] = true;
+				return false;
+			}
+
+			@Override
+			public boolean touchUp (int screenX, int screenY, int pointer, int button) {
+				justLifted[pointer] = true;
+				return false;
+			}
+		});
 	}
 	
 	public void setScene(Scene scene) {
@@ -75,6 +91,11 @@ public class Game {
 			}
 		}
 		
+		for(int i = 0; i < justTouched.length; i++) {
+			justTouched[i] = false;
+			justLifted[i] = false;
+		}
+		
 //		renderer.setProjectionMatrix(camera.combined);
 //		renderer.begin(ShapeType.Filled);
 //		renderer.setColor(1, 0, 0, 1);
@@ -98,12 +119,12 @@ public class Game {
 		}
 	}
 
-	public Entity getDrawable (String name) {
+	public <T extends Entity> T getEntity (String name, Class<T> clazz) {
 		Iterator<Entity> iter = drawables.iterator();
 		while(iter.hasNext()) {
 			Entity d = iter.next();
 			if(d.name.equals(name)) {
-				return d;
+				return (T)d;
 			}
 		}
 		return null;

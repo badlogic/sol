@@ -26,7 +26,7 @@ public class MoveTo implements Command {
 	
 	@Override
 	public void update (float delta) {
-		if(d == null) d = Game.ctx.getDrawable(name);
+		if(d == null) d = Game.ctx.getEntity(name, Entity.class);
 		v.set(x - d.x, y - d.y).nor().scl(delta * speed);
 		d.x = d.x + v.x;
 		d.y = d.y + v.y;
