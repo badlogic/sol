@@ -3,8 +3,6 @@ package com.badlogic.sol;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.sol.scenes.BowserScene;
-import com.badlogic.sol.scenes.MarioScene;
-import com.badlogic.sol.scenes.OutdoorScene;
 
 
 public class Sol extends ApplicationAdapter {
@@ -13,7 +11,7 @@ public class Sol extends ApplicationAdapter {
 	@Override
 	public void create () {
 		game = new Game();
-		game.setScene(new OutdoorScene());
+		game.setScene(new BowserScene());
 	}
 
 	@Override

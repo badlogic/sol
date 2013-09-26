@@ -5,7 +5,7 @@ import com.badlogic.sol.Assets;
 import com.badlogic.sol.Entity;
 
 public class Image extends Entity {
-	String imageName;
+	public String imageName;
 	
 	public Image(String name, String imageName, int x, int y, int z) {
 		super(name, x, y, z);

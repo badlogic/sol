@@ -10,19 +10,20 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class Assets {
 	static ObjectMap<String, Animation> animations = new ObjectMap<String, Animation>();
-	static ObjectMap<String, Texture> images = new ObjectMap<String, Texture>();
+	static ObjectMap<String, TextureRegion> images = new ObjectMap<String, TextureRegion>();
 	public static BitmapFont font;
 	
 	public static void load() {
 		// stef
 		animations.put("idle-right", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, false));
 		animations.put("idle-left", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, true));
-		animations.put("walk-right", loadAnim("stef/stef-walk.png", 32, 64, 0.3f, false));
-		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.3f, true));
+		animations.put("walk-right", loadAnim("stef/stef-walk_new.png", 32, 64, 0.3f, false));
+		animations.put("walk-left", loadAnim("stef/stef-walk_new.png", 32, 64, 0.3f, true));
 		animations.put("back", loadAnim("stef/stef-back.png", 32, 64, 0.5f, false));
 		animations.put("front", loadAnim("stef/stef-front.png", 32, 64, 0.5f, false));
 		animations.put("kick-right", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, false));
 		animations.put("kick-left", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, true));
+		animations.put("paddle", loadAnim("stef/stef-paddle.png", 32, 64, 0.5f, false));
 		
 		// outdoor
 		images.put("outdoor", loadImage("outdoor/outdoor.png"));
@@ -49,13 +50,15 @@ public class Assets {
 		// bowser
 		images.put("dungeon", loadImage("bowser/dungeon.png"));
 		images.put("chain", loadImage("bowser/chain.png"));
+		images.put("fireball", loadImage("bowser/fire.png"));
 		animations.put("bowser", loadAnim("bowser/bowser.png", 32, 32, 0.3f, false));
+		
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}
 	
-	private static Texture loadImage(String fileName) {
-		return new Texture(fileName);
+	private static TextureRegion loadImage(String fileName) {
+		return new TextureRegion(new Texture(fileName));
 	}
 	
 	private static Animation loadAnim(String fileName, int fWidth, int fHeight, float frameDuration, boolean flipX) {
@@ -73,7 +76,7 @@ public class Assets {
 		return animations.get(name);
 	}
 	
-	public static Texture getImage(String name) {
+	public static TextureRegion getImage(String name) {
 		return images.get(name);
 	}
 }
