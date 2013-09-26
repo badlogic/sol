@@ -66,16 +66,16 @@ public class MarioScene extends Scene {
 		}
 	}
 	
-	public MarioScene() {
+	public MarioScene(boolean isRestart) {
 		for(int i = 0; i < 20; i++) {
-			Goomba g = new Goomba("g" + i, "goomba", 320 + i * MathUtils.random(16, 32), 64, MathUtils.random(1, 10));
+			Goomba g = new Goomba("g" + i, "goomba", 320 + i * MathUtils.random(20, 40), 64, MathUtils.random(1, 10));
 			g.dir = -1;
 			goombas.add(g);
 			add(g);
 		}
 		
 		for(int i = 0; i < 20; i++) {
-			Goomba g = new Goomba("g" + i, "goomba", -100 - i * MathUtils.random(16, 32), 64, MathUtils.random(1, 10));
+			Goomba g = new Goomba("g" + i, "goomba", -100 - i * MathUtils.random(20, 40), 64, MathUtils.random(1, 10));
 			g.dir = 1;
 			goombas.add(g);
 			add(g);
@@ -83,32 +83,38 @@ public class MarioScene extends Scene {
 		
 		add(new Image("background", "supermario", 0, 0, 0));
 		stef = new Animated("stef", "idle-left", 280, 64, 0); 
-		add(stef);	
+		add(stef);
 		
 		add(new Fade(Color.WHITE, 1, true));
 		add(new Wait(1));
 		add(new MoveToAnim("stef", "walk", 87, 64, 64));
-		add(new SetAnimation("stef", "front"));
-		add(new Wait(1));
-		add(new SetAnimation("stef", "idle-left"));
-		add(new Wait(1f));
-		add(new SetAnimation("stef", "idle-right"));
-		add(new Wait(1f));
-		add(new SetAnimation("stef", "front"));
-		add(new Text("W.T.F?!", Color.WHITE, 3, 87, 130));
-		add(new Animated("goomba", "goomba", 320, 64, 0));
-		add(new MoveTo("goomba", 240, 64, 50));
-		add(new SetAnimation("stef", "idle-right"));
-		add(new Wait(2));
-		add(new SetAnimation("stef", "front"));
-		add(new Text("Uh Oh", Color.WHITE, 2, 87, 130));
-		add(new SetAnimation("stef", "idle-right"));
-		add(new MoveTo("goomba", 104, 64, 50));
-		add(new SetAnimation("goomba", "goomba-dead", false));
-		add(new SetAnimation("stef", "kick-right", false));
-		add(new Wait(1));
-		add(new SetAnimation("stef", "front", false));
-		add(new Text("Stomp Stomp Motherfucker", Color.WHITE, 2, 110, 130));		
+		
+		if(!isRestart) {
+			add(new SetAnimation("stef", "front"));
+			add(new Wait(1));
+			add(new SetAnimation("stef", "idle-left"));
+			add(new Wait(1f));
+			add(new SetAnimation("stef", "idle-right"));
+			add(new Wait(1f));
+			add(new SetAnimation("stef", "front"));
+			add(new Text("W.T.F?!", Color.WHITE, 3, 87, 130));
+			add(new Animated("goomba", "goomba", 320, 64, 0));
+			add(new MoveTo("goomba", 240, 64, 50));
+			add(new SetAnimation("stef", "idle-right"));
+			add(new Wait(2));
+			add(new SetAnimation("stef", "front"));
+			add(new Text("Uh Oh", Color.WHITE, 2, 87, 130));
+			add(new SetAnimation("stef", "idle-right"));
+			add(new MoveTo("goomba", 104, 64, 50));
+			add(new SetAnimation("goomba", "goomba-dead", false));
+			add(new SetAnimation("stef", "kick-right", false));
+			add(new Wait(1));
+			add(new SetAnimation("stef", "front", false));
+			add(new Text("Stomp Stomp Motherfucker", Color.RED, 2, 110, 130));
+		} else {
+			add(new Text("Bring it on", Color.RED, 2, 110, 130));
+		}
+		add(new Image("controller", "controller", 0, 0, 1));
 	}	
 
 	@Override
@@ -150,6 +156,7 @@ public class MarioScene extends Scene {
 		}
 		
 		if(deadGoombas == goombas.size) {
+			add(new Remove("controller"));
 			add(new SetAnimation("stef", "front"));
 			add(new MoveToAnim("stef", "walk", 160, 64, 64));
 			add(new SetAnimation("stef", "front"));
@@ -158,15 +165,21 @@ public class MarioScene extends Scene {
 			add(new Image("mushroom", "mushroom", 240, 64, 0));
 			add(new Wait(0.5f));
 			add(new SetAnimation("stef", "idle-right"));
-			add(new Text("I love mushrooms!", Color.RED, 2, 160, 164));
+			add(new Text("UHHH a mushroom!", Color.MAGENTA, 2, 160, 164));
 			add(new Wait(2));
 			add(new MoveToAnim("stef", "walk", 240, 64, 64));
 			add(new SetAnimation("stef", "front"));
 			add(new Remove("mushroom"));
-			add(new Text("Om nom nom", Color.RED, 2, 160, 164));
-			add(new Fade(Color.WHITE, 2.4f, false));
-			add(new Wait(1));
+			add(new Text("Om nom nom", Color.MAGENTA, 2, 160, 164));
+			add(new Animated("mario", "mario-walk-right", 16, 64, 0));
+			add(new MoveToAnim("mario", "mario-walk", 64, 64, 64));
+			add(new SetAnimation("mario", "mario-right", true));
+			add(new Text("It'se me! Ma...", Color.WHITE, 2, 100, 132));
+			add(new Wait(2));
+			add(new Text("Mamma Mia!", Color.WHITE, 3, 100, 132));			
+			add(new Fade(Color.WHITE, 2.4f, false));			
 			add(new MoveToAnim("stef", "walk", 320, 64, 64));
+			add(new Wait(1));			
 			add(new NextScene(new BowserScene()));
 		}
 		
@@ -177,7 +190,7 @@ public class MarioScene extends Scene {
 			add(new MoveTo("stef", (int)stef.x, (int)-64, 40 * 6));
 			add(new Fade(Color.WHITE, 1, false));
 			add(new Wait(1));
-			add(new NextScene(new MarioScene()));
+			add(new NextScene(new MarioScene(true)));
 		}
 	}
 	
@@ -201,19 +214,19 @@ public class MarioScene extends Scene {
 				Game.ctx.camera.unproject(touch);
 				
 				if(Gdx.input.isTouched(i)) {
-					if(touch.x < 64) {
+					if(touch.x > 80 && touch.x < 112) {
 						state = State.Left;
-						lastMovingDirection = 1;
+						lastMovingDirection = -1;
 					}
 					
-					if(touch.x > 64 && touch.x < 128) {
+					if(touch.x > 112 && touch.x < 133) {
 						state = State.Right;
-						lastMovingDirection = -1;
+						lastMovingDirection = 1;
 					}
 				}
 				
 				if(Game.ctx.justTouched[i]) {																
-					if(touch.x > 214) {
+					if(touch.x > 160) {
 						state = State.Kick;
 						kickingStart = true;
 					}

@@ -186,7 +186,7 @@ public class EntranceScene extends Scene {
 			.add(new MoveToAnim("stef", "walk", -32, 80, 64))
 			.add(new Fade(Color.WHITE, 1, false))
 			.add(new Wait(1))
-			.add(new NextScene(new MarioScene()))
+			.add(new NextScene(new MarioScene(false)))
 		);
 	}
 }

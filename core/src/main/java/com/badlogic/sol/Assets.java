@@ -40,8 +40,15 @@ public class Assets {
 		animations.put("goomba", loadAnim("mario/goomba.png", 16, 16, 0.5f, false));
 		animations.put("goomba-dead", loadAnim("mario/goomba-dead.png", 16, 16, 0.1f, false));
 		images.put("mushroom", loadImage("mario/mushroom.png"));
+		animations.put("mario-right", loadAnim("mario/mario.png", 16, 16, 1, false));
+		animations.put("mario-left", loadAnim("mario/mario.png", 16, 16, 1, true));
+		animations.put("mario-walk-left", loadAnim("mario/mario-walk.png", 16, 16, 0.3f, true));
+		animations.put("mario-walk-right", loadAnim("mario/mario-walk.png", 16, 16, 0.3f, false));
+		images.put("controller", loadImage("mario/controller.png"));
 		
 		// bowser
+		images.put("dungeon", loadImage("bowser/dungeon.png"));
+		images.put("chain", loadImage("bowser/chain.png"));
 		animations.put("bowser", loadAnim("bowser/bowser.png", 32, 32, 0.3f, false));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
