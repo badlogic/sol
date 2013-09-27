@@ -109,7 +109,7 @@ public class BowserScene extends Scene {
 	Array<Fireball> fireballs = new Array<Fireball>();
 	float lastY = 0;
 	float bowserJumpVel = 10;
-	int bowserHealth = 1;
+	int bowserHealth = 3;
 	long bowserHitTime = 0;
 	float GRAVITY = -90f;
 	
