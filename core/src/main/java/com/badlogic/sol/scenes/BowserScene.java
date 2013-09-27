@@ -57,10 +57,10 @@ public class BowserScene extends Scene {
 		add(new Wait(3));
 		add(new Text("It's a long story", Color.CYAN, 2, 240, 140));
 		add(new Wait(2));
-		add(new Text("It involves computers and midgets", Color.CYAN, 3, 180, 140));
+		add(new Text("It involves computers and midgets", Color.CYAN, 4, 180, 140));
+		add(new Wait(4));
+		add(new Text("and one drunken pony", Color.CYAN, 3, 200, 140));
 		add(new Wait(3));
-		add(new Text("and one drunken pony", Color.CYAN, 2, 200, 140));
-		add(new Wait(2));
 		add(new Text("Damn ponies", Color.WHITE, 2, 100, 140));
 		add(new Wait(2));
 		add(new Text("Enough!", Color.RED, 2, 180, 140));

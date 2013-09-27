@@ -78,6 +78,7 @@ public class Game {
 		for(Entity d: drawables) {
 			d.draw(deltaTime, batch);
 		}
+		batch.end();
 		
 		if(removed.size() > 0) {
 			Iterator<Entity> iter = drawables.iterator();
