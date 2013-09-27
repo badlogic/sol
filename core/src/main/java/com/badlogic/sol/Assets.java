@@ -1,6 +1,7 @@
 package com.badlogic.sol;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,14 +13,15 @@ import com.badlogic.gdx.utils.ObjectMap;
 public class Assets {
 	static ObjectMap<String, Animation> animations = new ObjectMap<String, Animation>();
 	static ObjectMap<String, TextureRegion> images = new ObjectMap<String, TextureRegion>();
+	static ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
 	public static BitmapFont font;
 	
 	public static void load() {
 		// stef
 		animations.put("idle-right", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, false));
 		animations.put("idle-left", loadAnim("stef/stef-idle.png", 32, 64, 0.5f, true));
-		animations.put("walk-right", loadAnim("stef/stef-walk.png", 32, 64, 0.3f, false));
-		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.3f, true));
+		animations.put("walk-right", loadAnim("stef/stef-walk.png", 32, 64, 0.15f, false));
+		animations.put("walk-left", loadAnim("stef/stef-walk.png", 32, 64, 0.15f, true));
 		animations.put("back", loadAnim("stef/stef-back.png", 32, 64, 0.5f, false));
 		animations.put("front", loadAnim("stef/stef-front.png", 32, 64, 0.5f, false));
 		animations.put("kick-right", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, false));
@@ -28,8 +30,8 @@ public class Assets {
 		
 		animations.put("realmario-idle-right", loadAnim("stef/mario-idle.png", 32, 64, 0.5f, false));
 		animations.put("realmario-idle-left", loadAnim("stef/mario-idle.png", 32, 64, 0.5f, true));
-		animations.put("realmario-walk-right", loadAnim("stef/mario-walk.png", 32, 64, 0.3f, false));
-		animations.put("realmario-walk-left", loadAnim("stef/mario-walk.png", 32, 64, 0.3f, true));
+		animations.put("realmario-walk-right", loadAnim("stef/mario-walk.png", 32, 64, 0.15f, false));
+		animations.put("realmario-walk-left", loadAnim("stef/mario-walk.png", 32, 64, 0.15f, true));
 		animations.put("realmario-front", loadAnim("stef/mario-front.png", 32, 64, 0.3f, true));
 		animations.put("realmario-censored", loadAnim("stef/mario-censored.png", 32, 64, 0.3f, false));
 		animations.put("realmario-censored-tada", loadAnim("stef/mario-censored-left.png", 32, 64, 0.3f, false));
@@ -63,10 +65,19 @@ public class Assets {
 		animations.put("bowser", loadAnim("bowser/bowser.png", 32, 32, 0.3f, false));
 		animations.put("bowser-hit", loadAnim("bowser/bowser-hit.png", 32, 32, 0.3f, false));
 		
+		// sounds
+		sounds.put("door-open", loadSound("audio/door-open.ogg"));
+		sounds.put("door-close", loadSound("audio/door-close.ogg"));
+		sounds.put("door-bell", loadSound("audio/door-bell.ogg"));
+		sounds.put("vulture", loadSound("audio/vulture.ogg"));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}
 	
+	private static Sound loadSound (String file) {
+		return Gdx.audio.newSound(Gdx.files.internal(file));
+	}
+
 	private static TextureRegion loadImage(String fileName) {
 		return new TextureRegion(new Texture(fileName));
 	}
@@ -92,6 +103,9 @@ public class Assets {
 		TextureRegion img = images.get(name);
 		if(img == null) throw new GdxRuntimeException("Couldn't find image: " + name);
 		return img;
-		
+	}
+	
+	public static void playSound(String name) {
+		sounds.get(name).play();
 	}
 }

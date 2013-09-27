@@ -1,7 +1,6 @@
 package com.badlogic.sol.scenes;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.sol.Inventory;
 import com.badlogic.sol.Scene;
 import com.badlogic.sol.Trigger;
 import com.badlogic.sol.command.AddItem;

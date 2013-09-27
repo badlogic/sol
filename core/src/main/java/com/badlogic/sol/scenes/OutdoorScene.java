@@ -10,6 +10,8 @@ import com.badlogic.sol.command.MoveTo;
 import com.badlogic.sol.command.MoveToAnim;
 import com.badlogic.sol.command.New;
 import com.badlogic.sol.command.NextScene;
+import com.badlogic.sol.command.PlaySound;
+import com.badlogic.sol.command.Remove;
 import com.badlogic.sol.command.SetAnimation;
 import com.badlogic.sol.command.Wait;
 import com.badlogic.sol.entity.Animated;
@@ -41,7 +43,8 @@ public class OutdoorScene extends Scene {
 					.add(new Wait(0.2f))
 					.add(new Text("Away, stupid bird!", Color.BLACK, 2f, 71, 220))
 					.add(new Wait(0.2f))
-					.add(new SetAnimation("bird", "bird-fly", true))
+					.add(new SetAnimation("bird", "bird-fly"))
+					.add(new PlaySound("vulture"))
 					.add(new MoveTo("bird", 200, 241, 80))
 					.add(new SetAnimation("stef", "front"))
 					.add(new Text("And stay away!", Color.BLACK, 2f, 71, 220))
@@ -66,6 +69,7 @@ public class OutdoorScene extends Scene {
 				.add(new MoveToAnim("stef", "walk", 100, 80, 64))
 				.add(new SetAnimation("stef", "back"))
 				.add(new Text("Ding Dong", Color.BLACK, 1f, 220, 186))
+				.add(new PlaySound("door-bell"))
 				.add(new Wait(1f))
 				.add(new SetAnimation("stef", "front"))
 				.add(new Text("Hihi", Color.BLACK, 1f, 220, 186))			
@@ -78,6 +82,12 @@ public class OutdoorScene extends Scene {
 			)))
 			.add(new MoveToAnim("stef", "walk", 92, 80, 64))
 			.add(new SetAnimation("stef", "back"))
+			.add(new Image("opendoor", "opendoor", 83, 80, 1))
+			.add(new PlaySound("door-open"))
+			.add(new Wait(1))
+			.add(new PlaySound("door-close"))
+			.add(new Remove("opendoor"))
+			.add(new Remove("stef"))
 			.add(new Text("Home Sweet Home", Color.BLACK, 2, 80, 186))
 			.add(new Fade(Color.WHITE, 1, false))
 			.add(new Wait(1))

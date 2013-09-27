@@ -12,7 +12,7 @@ import com.badlogic.sol.entity.Animated;
 public class SetAnimation implements Command {
 	String name;
 	String animationName;
-	boolean looped;
+	boolean looped = true;
 	
 	public SetAnimation(String name, String animationName) {
 		this.name = name;
