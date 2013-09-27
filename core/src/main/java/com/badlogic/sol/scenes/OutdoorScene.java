@@ -55,13 +55,13 @@ public class OutdoorScene extends Scene {
 		
 		// window trigger
 		add(new Trigger("window-trigger", 183, 118, 226, 152)
-				.add(new MoveToAnim("stef", "walk", 200, 80, 64))
+				.add(new MoveToAnim("stef", "walk", 200, 80, 64))			
 				.add(new SetAnimation("stef", "back"))
-				.add(new Wait(0.2f))
-				.add(new SetAnimation("stef", "back"))
-				.add(new Wait(0.5f))
+				.add(new PlaySound("glass"))
+				.add(new Wait(2f))
 				.add(new SetAnimation("stef", "front"))
-				.add(new Text("I hope he cleans that soon", Color.BLACK, 2f, 220, 186))
+				.add(new Text("I hope he cleans that soon", Color.BLACK, 2f, 220, 186))				
+				.add(new Wait(2))
 		);
 		
 		// doorbell trigger

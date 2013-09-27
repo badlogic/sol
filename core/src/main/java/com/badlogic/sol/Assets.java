@@ -70,6 +70,7 @@ public class Assets {
 		sounds.put("door-close", loadSound("audio/door-close.ogg"));
 		sounds.put("door-bell", loadSound("audio/door-bell.ogg"));
 		sounds.put("vulture", loadSound("audio/vulture.ogg"));
+		sounds.put("glass", loadSound("audio/glass.ogg"));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}
