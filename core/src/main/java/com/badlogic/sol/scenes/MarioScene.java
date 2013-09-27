@@ -3,7 +3,6 @@ package com.badlogic.sol.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -19,6 +18,7 @@ import com.badlogic.sol.command.Wait;
 import com.badlogic.sol.entity.Animated;
 import com.badlogic.sol.entity.Fade;
 import com.badlogic.sol.entity.Image;
+import com.badlogic.sol.entity.MovingText;
 import com.badlogic.sol.entity.Text;
 
 public class MarioScene extends Scene {
@@ -50,19 +50,6 @@ public class MarioScene extends Scene {
 		float dir = -1;
 		public Goomba (String name, String animationName, int x, int y, int z) {
 			super(name, animationName, x, y, z);
-		}
-	}
-	
-	class MovingText extends Text {
-
-		public MovingText (String text, Color color, float duration, int x, int y) {
-			super(text, color, duration, x, y);
-		}
-
-		@Override
-		public void draw (float deltaTime, SpriteBatch batch) {
-			super.draw(deltaTime, batch);
-			y+=deltaTime * 30;
 		}
 	}
 	

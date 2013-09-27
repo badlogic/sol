@@ -79,10 +79,6 @@ public class Game {
 			d.draw(deltaTime, batch);
 		}
 		
-		Assets.font.setColor(Color.RED);
-		Assets.font.draw(batch, (int)v.x + ", " + (int)v.y, 0, 12);
-		batch.end();
-		
 		if(removed.size() > 0) {
 			Iterator<Entity> iter = drawables.iterator();
 			while(iter.hasNext()) {
@@ -96,14 +92,6 @@ public class Game {
 			justTouched[i] = false;
 			justLifted[i] = false;
 		}
-		
-//		renderer.setProjectionMatrix(camera.combined);
-//		renderer.begin(ShapeType.Filled);
-//		renderer.setColor(1, 0, 0, 1);
-//		for(Drawable d: drawables) {
-//			renderer.rect(d.x, d.y, 2, 2);
-//		}
-//		renderer.end();
 	}
 
 	public void addDrawable(Entity drawable) {
