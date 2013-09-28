@@ -70,28 +70,30 @@ public class Assets {
 		animations.put("bowser-hit", loadAnim("bowser/bowser-hit.png", 32, 32, 0.3f, false));
 		
 		// sounds
-		sounds.put("door-open", loadSound("audio/door-open.ogg"));
-		sounds.put("door-close", loadSound("audio/door-close.ogg"));
-		sounds.put("door-bell", loadSound("audio/door-bell.ogg"));
-		sounds.put("vulture", loadSound("audio/vulture.ogg"));
-		sounds.put("glass", loadSound("audio/glass.ogg"));
-		sounds.put("heating", loadSound("audio/heating.ogg"));
-		sounds.put("flush", loadSound("audio/flush.ogg"));
+		sounds.put("door-open", loadSound("audio/door-open.mp3"));
+		sounds.put("door-close", loadSound("audio/door-close.mp3"));
+		sounds.put("door-bell", loadSound("audio/door-bell.mp3"));
+		sounds.put("vulture", loadSound("audio/vulture.mp3"));
+		sounds.put("glass", loadSound("audio/glass.mp3"));
+		sounds.put("heating", loadSound("audio/heating.mp3"));
+		sounds.put("flush", loadSound("audio/flush.mp3"));
 		sounds.put("achievement", loadSound("audio/achievement.mp3"));
-		sounds.put("shower", loadSound("audio/shower.ogg"));
+		sounds.put("shower", loadSound("audio/shower.mp3"));
 		sounds.put("chunli", loadSound("audio/chunli.mp3"));
-		sounds.put("chewing", loadSound("audio/chewing.ogg"));
-		sounds.put("death", loadSound("audio/mariodeath.ogg"));
-		sounds.put("bowserdeath", loadSound("audio/bowserdeath.ogg"));
-		sounds.put("trumpet", loadSound("audio/trumpet.ogg"));
+		sounds.put("chewing", loadSound("audio/chewing.mp3"));
+		sounds.put("death", loadSound("audio/mariodeath.mp3"));
+		sounds.put("bowserdeath", loadSound("audio/bowserdeath.mp3"));
+		sounds.put("trumpet", loadSound("audio/trumpet.mp3"));
 		sounds.put("coin", loadSound("audio/coin.mp3"));
-		sounds.put("bump", loadSound("audio/bump.ogg"));
-		sounds.put("block", loadSound("audio/block.ogg"));
+		sounds.put("bump", loadSound("audio/bump.mp3"));
+		sounds.put("block", loadSound("audio/block.mp3"));
 		
 		// music
+		music.put("adventure", loadMusic("audio/adventure.mp3"));
+		music.put("indoors", loadMusic("audio/indoors.mp3"));
 		music.put("mario", loadMusic("audio/mario.mp3"));
 		music.put("castle", loadMusic("audio/castle.mp3"));
-		music.put("win", loadMusic("audio/win.ogg"));
+		music.put("win", loadMusic("audio/win.mp3"));
 		music.put("zelda", loadMusic("audio/zelda.mp3"));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);

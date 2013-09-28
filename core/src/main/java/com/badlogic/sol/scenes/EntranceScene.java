@@ -9,10 +9,12 @@ import com.badlogic.sol.command.IfHasNot;
 import com.badlogic.sol.command.MoveToAnim;
 import com.badlogic.sol.command.New;
 import com.badlogic.sol.command.NextScene;
+import com.badlogic.sol.command.PlayMusic;
 import com.badlogic.sol.command.PlaySound;
 import com.badlogic.sol.command.Remove;
 import com.badlogic.sol.command.SetAnimation;
 import com.badlogic.sol.command.SetZ;
+import com.badlogic.sol.command.StopMusic;
 import com.badlogic.sol.command.Wait;
 import com.badlogic.sol.entity.Animated;
 import com.badlogic.sol.entity.Fade;
@@ -22,6 +24,7 @@ import com.badlogic.sol.entity.Text;
 public class EntranceScene extends Scene {
 	public EntranceScene() {
 		// setup scene
+		add(new PlayMusic("indoors", 0.4f, true));
 		add(new Image("background", "entrance", 0, 0, 0));
 		add(new Animated("stef", "front", 35, 80, 10));
 		add(new Animated("panel", "panel", 68, 120, 0));
@@ -201,6 +204,7 @@ public class EntranceScene extends Scene {
 			.add(new MoveToAnim("stef", "walk", -32, 80, 64))
 			.add(new Fade(Color.WHITE, 1, false))
 			.add(new Wait(1))
+			.add(new StopMusic("indoors"))
 			.add(new NextScene(new MarioScene(false)))
 		);
 	}

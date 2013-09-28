@@ -165,15 +165,15 @@ public class MarioScene extends Scene {
 			add(new Remove("mushroom"));
 			add(new Text("Om nom nom", Color.MAGENTA, 2, 160, 164));
 			add(new PlaySound("chewing"));
+			add(new MoveToAnim("stef", "walk", 320, 64, 64));
 			add(new Animated("mario", "mario-walk-right", 16, 64, 0));
 			add(new MoveToAnim("mario", "mario-walk", 64, 64, 64));
 			add(new SetAnimation("mario", "mario-right", true));
 			add(new Text("It'se me! Ma...", Color.WHITE, 2, 100, 132));
 			add(new Wait(2));
 			add(new Text("Mamma Mia!", Color.WHITE, 3, 100, 132));			
-			add(new Fade(Color.WHITE, 2.4f, false));			
-			add(new MoveToAnim("stef", "walk", 320, 64, 64));
-			add(new Wait(1));			
+			add(new Fade(Color.WHITE, 3f, false));						
+			add(new Wait(3));			
 			add(new StopMusic("mario"));
 			add(new NextScene(new BowserScene()));
 		}

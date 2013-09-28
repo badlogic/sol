@@ -1,6 +1,7 @@
 package com.badlogic.sol.scenes;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.sol.Assets;
 import com.badlogic.sol.Inventory;
 import com.badlogic.sol.Scene;
 import com.badlogic.sol.Trigger;
@@ -13,6 +14,7 @@ import com.badlogic.sol.command.NextScene;
 import com.badlogic.sol.command.PlaySound;
 import com.badlogic.sol.command.Remove;
 import com.badlogic.sol.command.SetAnimation;
+import com.badlogic.sol.command.StopMusic;
 import com.badlogic.sol.command.Wait;
 import com.badlogic.sol.entity.Animated;
 import com.badlogic.sol.entity.Fade;
@@ -21,6 +23,8 @@ import com.badlogic.sol.entity.Text;
 
 public class OutdoorScene extends Scene {
 	public OutdoorScene() {
+		Assets.playMusic("adventure", 0.4f, true);
+		
 		// setup scene
 		add(new Image("background", "outdoor", 0, 0, 0));
 		add(new Animated("stef", "idle-left", 320, 80, 10));
@@ -91,6 +95,7 @@ public class OutdoorScene extends Scene {
 			.add(new Text("Home Sweet Home", Color.BLACK, 2, 80, 186))
 			.add(new Fade(Color.WHITE, 1, false))
 			.add(new Wait(1))
+			.add(new StopMusic("adventure"))
 			.add(new NextScene(new EntranceScene()))
 		);
 	}

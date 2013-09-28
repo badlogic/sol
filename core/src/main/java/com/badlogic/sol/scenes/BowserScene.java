@@ -245,7 +245,7 @@ public class BowserScene extends Scene {
 		}
 		add(new SetAnimation("bowser", "bowser-hit"));
 		add(new MoveTo("bowser", (int)bowser.x, -32, 100));
-		add(new PlayMusic("win", false));
+		add(new PlayMusic("win", 1, false));
 		add(new MoveTo("stef", (int)stef.x, 60, 64));
 		add(new SetAnimation("stef", "idle-right"));
 		add(new Remove("chain"));
@@ -267,10 +267,10 @@ public class BowserScene extends Scene {
 		add(new Text("You first have to unpack your presents!", Color.CYAN, 3, 160, 140));
 		add(new Wait(3));
 		add(new SetAnimation("mario", "realmario-front"));		
-		add(new Text("Your present is...", Color.CYAN, 3, 160, 140));
+		add(new Text("MY first present to you is...", Color.CYAN, 3, 160, 140));
 		add(new Wait(3));
 		add(new SetAnimation("mario", "realmario-censored-tada"));
-		add(new Text("ME... TADA!", Color.CYAN, 3, 160, 140));
+		add(new Text("...ME! TADA!", Color.CYAN, 3, 160, 140));
 		add(new PlaySound("trumpet"));
 		add(new Wait(5));
 		add(new SetAnimation("mario", "realmario-censored"));
