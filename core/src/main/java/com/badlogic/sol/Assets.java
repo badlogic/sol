@@ -1,6 +1,7 @@
 package com.badlogic.sol;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -14,6 +15,7 @@ public class Assets {
 	static ObjectMap<String, Animation> animations = new ObjectMap<String, Animation>();
 	static ObjectMap<String, TextureRegion> images = new ObjectMap<String, TextureRegion>();
 	static ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
+	static ObjectMap<String, Music> music = new ObjectMap<String, Music>();
 	public static BitmapFont font;
 	
 	public static void load() {
@@ -27,6 +29,7 @@ public class Assets {
 		animations.put("kick-right", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, false));
 		animations.put("kick-left", loadAnim("stef/stef-kick.png", 32, 64, 0.5f, true));
 		animations.put("paddle", loadAnim("stef/stef-paddle.png", 32, 64, 0.5f, false));
+		animations.put("kiss", loadAnim("stef/stef-kiss.png", 32, 64, 0.3f, false));
 		
 		animations.put("realmario-idle-right", loadAnim("stef/mario-idle.png", 32, 64, 0.5f, false));
 		animations.put("realmario-idle-left", loadAnim("stef/mario-idle.png", 32, 64, 0.5f, true));
@@ -35,6 +38,7 @@ public class Assets {
 		animations.put("realmario-front", loadAnim("stef/mario-front.png", 32, 64, 0.3f, true));
 		animations.put("realmario-censored", loadAnim("stef/mario-censored.png", 32, 64, 0.3f, false));
 		animations.put("realmario-censored-tada", loadAnim("stef/mario-censored-left.png", 32, 64, 0.3f, false));
+		animations.put("realmario-kiss", loadAnim("stef/mario-kiss.png", 32, 64, 0.3f, false));
 		
 		// outdoor
 		images.put("outdoor", loadImage("outdoor/outdoor.png"));
@@ -71,10 +75,32 @@ public class Assets {
 		sounds.put("door-bell", loadSound("audio/door-bell.ogg"));
 		sounds.put("vulture", loadSound("audio/vulture.ogg"));
 		sounds.put("glass", loadSound("audio/glass.ogg"));
+		sounds.put("heating", loadSound("audio/heating.ogg"));
+		sounds.put("flush", loadSound("audio/flush.ogg"));
+		sounds.put("achievement", loadSound("audio/achievement.mp3"));
+		sounds.put("shower", loadSound("audio/shower.ogg"));
+		sounds.put("chunli", loadSound("audio/chunli.mp3"));
+		sounds.put("chewing", loadSound("audio/chewing.ogg"));
+		sounds.put("death", loadSound("audio/mariodeath.ogg"));
+		sounds.put("bowserdeath", loadSound("audio/bowserdeath.ogg"));
+		sounds.put("trumpet", loadSound("audio/trumpet.ogg"));
+		sounds.put("coin", loadSound("audio/coin.mp3"));
+		sounds.put("bump", loadSound("audio/bump.ogg"));
+		sounds.put("block", loadSound("audio/block.ogg"));
+		
+		// music
+		music.put("mario", loadMusic("audio/mario.mp3"));
+		music.put("castle", loadMusic("audio/castle.mp3"));
+		music.put("win", loadMusic("audio/win.ogg"));
+		music.put("zelda", loadMusic("audio/zelda.mp3"));
 		
 		font = new FreeTypeFontGenerator(Gdx.files.internal("wendy.ttf")).generateFont(20, FreeTypeFontGenerator.DEFAULT_CHARS, false);
 	}
 	
+	private static Music loadMusic (String file) {
+		return Gdx.audio.newMusic(Gdx.files.internal(file));
+	}
+
 	private static Sound loadSound (String file) {
 		return Gdx.audio.newSound(Gdx.files.internal(file));
 	}
@@ -108,5 +134,15 @@ public class Assets {
 	
 	public static void playSound(String name) {
 		sounds.get(name).play();
+	}
+	
+	public static void playMusic(String name, float volume, boolean looped) {
+		music.get(name).setVolume(volume);
+		music.get(name).setLooping(looped);
+		music.get(name).play();	
+	}
+	
+	public static void stopMusic(String name) {
+		music.get(name).stop();
 	}
 }

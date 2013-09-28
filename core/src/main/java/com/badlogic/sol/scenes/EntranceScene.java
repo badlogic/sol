@@ -9,6 +9,7 @@ import com.badlogic.sol.command.IfHasNot;
 import com.badlogic.sol.command.MoveToAnim;
 import com.badlogic.sol.command.New;
 import com.badlogic.sol.command.NextScene;
+import com.badlogic.sol.command.PlaySound;
 import com.badlogic.sol.command.Remove;
 import com.badlogic.sol.command.SetAnimation;
 import com.badlogic.sol.command.SetZ;
@@ -74,31 +75,39 @@ public class EntranceScene extends Scene {
 			.add(new Text("Commencing Pee Pee", Color.BLACK, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Image("opendoor", "opendoor", 137, 80, 1))
+			.add(new PlaySound("door-open"))
 			.add(new Wait(1))
 			.add(new Remove("opendoor"))
+			.add(new PlaySound("door-close"))
 			.add(new Image("door", "door", 137, 80, 100))
 			.add(new Text("*Censored*", Color.MAGENTA, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("*FLUSH*", Color.MAGENTA, 2, 157, 186))
+			.add(new PlaySound("flush"))
 			.add(new Wait(3))
 			.add(new Text("GOD DAMNIT", Color.RED, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("*FLUSH FLUSH*", Color.MAGENTA, 2, 157, 186))
+			.add(new PlaySound("flush"))
 			.add(new Wait(3))
 			.add(new Text("GAHHH", Color.RED, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("*FLUSH FLUSH FLUSH*", Color.MAGENTA, 2, 157, 186))
+			.add(new PlaySound("flush"))
 			.add(new Wait(3))
 			.add(new Remove("door"))
+			.add(new PlaySound("door-open"))
 			.add(new SetAnimation("stef", "front"))
 			.add(new Image("opendoor", "opendoor", 137, 80, 100))
 			.add(new Wait(0.5f))
 			.add(new SetZ("opendoor", 1))
 			.add(new Wait(0.5f))
 			.add(new Remove("opendoor"))
+			.add(new PlaySound("door-close"))
 			.add(new Text("This Toilet must die", Color.RED, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("Achievement Unlocked: Rage Flush", Color.GREEN, 3, 157, 50))
+			.add(new PlaySound("achievement"))
 			.add(new Wait(3))
 			.add(new Text("Not funny!", Color.RED, 2, 157, 186))
 			.add(new Wait(2))
@@ -113,6 +122,7 @@ public class EntranceScene extends Scene {
 				new New(new Text("I hope heating works", Color.BLACK, 2, 100, 186)),
 				new Wait(2),
 				new New(new Text("*Tip Tap*", Color.MAGENTA, 2, 66, 186)),
+				new PlaySound("heating"),
 				new Wait(2),
 				new SetAnimation("stef", "front"),
 				new New(new Text("Well, that didn't do anything", Color.BLACK, 2, 120, 186)),
@@ -142,8 +152,10 @@ public class EntranceScene extends Scene {
 			.add(new Text("To the shower!", Color.BLACK, 2, 160, 186))
 			.add(new Wait(2))
 			.add(new Image("opendoor", "opendoor", 190, 80, 1))
+			.add(new PlaySound("door-open"))
 			.add(new Wait(1))
 			.add(new Remove("opendoor"))
+			.add(new PlaySound("door-close"))
 			.add(new Image("door", "door", 190, 80, 100))
 			
 			.add(new Text("*Undresses*", Color.MAGENTA, 2, 157, 186))
@@ -153,6 +165,7 @@ public class EntranceScene extends Scene {
 			.add(new Text("Get the fuck out!", Color.RED, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("*Watersounds*", Color.MAGENTA, 2, 157, 186))
+			.add(new PlaySound("shower"))
 			.add(new Wait(2))
 			.add(new Text("*Scrub Scrub*", Color.MAGENTA, 2, 157, 186))
 			.add(new Wait(2))
@@ -170,13 +183,16 @@ public class EntranceScene extends Scene {
 			.add(new Remove("door"))
 			.add(new SetAnimation("stef", "front"))
 			.add(new Image("opendoor", "opendoor", 190, 80, 100))
+			.add(new PlaySound("door-open"))
 			.add(new Wait(0.5f))
 			.add(new SetZ("opendoor", 1))
 			.add(new Wait(0.5f))
 			.add(new Remove("opendoor"))
+			.add(new PlaySound("door-close"))
 			.add(new Text("My body is a temple", Color.RED, 2, 157, 186))
 			.add(new Wait(2))
 			.add(new Text("Achievement Unlocked: you sexy thing", Color.GREEN, 3, 157, 50))
+			.add(new PlaySound("achievement"))
 			.add(new Wait(3))
 			.add(new Text("Damn right", Color.RED, 2, 157, 186))
 			.add(new Wait(2))

@@ -7,13 +7,17 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.sol.Assets;
 import com.badlogic.sol.Game;
 import com.badlogic.sol.Scene;
 import com.badlogic.sol.command.MoveTo;
 import com.badlogic.sol.command.MoveToAnim;
 import com.badlogic.sol.command.NextScene;
+import com.badlogic.sol.command.PlayMusic;
+import com.badlogic.sol.command.PlaySound;
 import com.badlogic.sol.command.Remove;
 import com.badlogic.sol.command.SetAnimation;
+import com.badlogic.sol.command.StopMusic;
 import com.badlogic.sol.command.Wait;
 import com.badlogic.sol.entity.Animated;
 import com.badlogic.sol.entity.Fade;
@@ -66,8 +70,9 @@ public class MarioScene extends Scene {
 			g.dir = 1;
 			goombas.add(g);
 			add(g);
-		}
+		}				
 		
+		add(new PlayMusic("mario"));
 		add(new Image("background", "supermario", 0, 0, 0));
 		stef = new Animated("stef", "idle-left", 280, 64, 0); 
 		add(stef);
@@ -95,6 +100,7 @@ public class MarioScene extends Scene {
 			add(new MoveTo("goomba", 104, 64, 50));
 			add(new SetAnimation("goomba", "goomba-dead", false));
 			add(new SetAnimation("stef", "kick-right", false));
+			add(new PlaySound("chunli"));
 			add(new Wait(1));
 			add(new SetAnimation("stef", "front", false));
 			add(new Text("Stomp Stomp Motherfucker", Color.RED, 2, 110, 130));
@@ -158,6 +164,7 @@ public class MarioScene extends Scene {
 			add(new SetAnimation("stef", "front"));
 			add(new Remove("mushroom"));
 			add(new Text("Om nom nom", Color.MAGENTA, 2, 160, 164));
+			add(new PlaySound("chewing"));
 			add(new Animated("mario", "mario-walk-right", 16, 64, 0));
 			add(new MoveToAnim("mario", "mario-walk", 64, 64, 64));
 			add(new SetAnimation("mario", "mario-right", true));
@@ -167,16 +174,19 @@ public class MarioScene extends Scene {
 			add(new Fade(Color.WHITE, 2.4f, false));			
 			add(new MoveToAnim("stef", "walk", 320, 64, 64));
 			add(new Wait(1));			
+			add(new StopMusic("mario"));
 			add(new NextScene(new BowserScene()));
 		}
 		
 		if(dead) {
+			Assets.stopMusic("mario");
 			add(new SetAnimation("stef", "front"));
 			add(new Text("Ouch", Color.RED, 2, (int)stef.x, (int)stef.y + 100));
+			add(new PlaySound("death"));
 			add(new MoveTo("stef", (int)stef.x, (int)stef.y + 40, 40 * 3));
 			add(new MoveTo("stef", (int)stef.x, (int)-64, 40 * 6));
-			add(new Fade(Color.WHITE, 1, false));
-			add(new Wait(1));
+			add(new Fade(Color.WHITE, 1.5f, false));
+			add(new Wait(1.5f));
 			add(new NextScene(new MarioScene(true)));
 		}
 	}
@@ -216,6 +226,7 @@ public class MarioScene extends Scene {
 					if(touch.x > 160) {
 						state = State.Kick;
 						kickingStart = true;
+						Assets.playSound("chunli");
 					}
 				}									
 			}							

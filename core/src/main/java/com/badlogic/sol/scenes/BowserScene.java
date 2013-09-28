@@ -13,6 +13,8 @@ import com.badlogic.sol.Game;
 import com.badlogic.sol.Scene;
 import com.badlogic.sol.command.MoveTo;
 import com.badlogic.sol.command.MoveToAnim;
+import com.badlogic.sol.command.PlayMusic;
+import com.badlogic.sol.command.PlaySound;
 import com.badlogic.sol.command.Remove;
 import com.badlogic.sol.command.SetAnimation;
 import com.badlogic.sol.command.Wait;
@@ -31,6 +33,7 @@ public class BowserScene extends Scene {
 		stef = new Animated("stef", "idle-right", -32, 60, 0);
 		bowser = new Animated("bowser", "bowser", 230, 60, 3);
 		mario = new Animated("mario", "realmario-idle-left", 320, 60, 0);
+		add(new PlayMusic("castle"));
 		add(stef);
 		add(bowser);
 		add(mario);
@@ -121,7 +124,7 @@ public class BowserScene extends Scene {
 			processInput();
 			updateFireballs(deltaTime);
 			updateBowser(deltaTime);					
-		}
+		}		
 	}
 	
 	public void processInput() {
@@ -149,6 +152,7 @@ public class BowserScene extends Scene {
 					fb.dirX = 1;					
 					fb.normalizeDir();
 					fb.bounces ++;
+					Assets.playSound("bump");
 				}
 			}
 			
@@ -156,6 +160,7 @@ public class BowserScene extends Scene {
 				fb.dirX = -1;
 				fb.normalizeDir();
 				fb.bounces++;
+				Assets.playSound("bump");
 			}
 			
 			if(fb.y + 16 > 223) {
@@ -163,6 +168,7 @@ public class BowserScene extends Scene {
 				fb.dirY = -fb.dirY;
 				fb.normalizeDir();
 				fb.bounces++;
+				Assets.playSound("bump");
 			}
 			
 			if(fb.y < 60) {
@@ -170,11 +176,13 @@ public class BowserScene extends Scene {
 				fb.dirY = -fb.dirY;
 				fb.normalizeDir();
 				fb.bounces++;
+				Assets.playSound("bump");
 			}
 			
 			if(fb.bounces > 3) {
 				iter.remove();
 				Game.ctx.removeDrawable(fb);
+				Assets.playSound("bump");
 			}
 			
 			if(fb.x + 8 > bowser.x && fb.x + 8 < bowser.x + 32) {
@@ -184,6 +192,7 @@ public class BowserScene extends Scene {
 					bowserHealth--;
 					bowserHitTime = System.nanoTime();
 					bowser.setAnimation("bowser-hit", true);
+					Assets.playSound("block");
 				}
 			}
 		}
@@ -227,11 +236,16 @@ public class BowserScene extends Scene {
 	}
 	
 	public void endSequence() {
+		Assets.stopMusic("castle");
+		Assets.playSound("bowserdeath");
+		
+		
 		for(Fireball fb: fireballs) {
 			Game.ctx.removeDrawable(fb);
 		}
 		add(new SetAnimation("bowser", "bowser-hit"));
 		add(new MoveTo("bowser", (int)bowser.x, -32, 100));
+		add(new PlayMusic("win", false));
 		add(new MoveTo("stef", (int)stef.x, 60, 64));
 		add(new SetAnimation("stef", "idle-right"));
 		add(new Remove("chain"));
@@ -246,6 +260,7 @@ public class BowserScene extends Scene {
 		add(new Text("I guess so", Color.WHITE, 2, 160, 140));
 		add(new Wait(2));
 		add(new Text("Can we go home now?", Color.WHITE, 2, 160, 140));
+		add(new PlayMusic("zelda"));
 		add(new Wait(2));
 		add(new Text("Nooo, it's your 20th birthday!", Color.CYAN, 3, 160, 140));
 		add(new Wait(3));
@@ -256,12 +271,14 @@ public class BowserScene extends Scene {
 		add(new Wait(3));
 		add(new SetAnimation("mario", "realmario-censored-tada"));
 		add(new Text("ME... TADA!", Color.CYAN, 3, 160, 140));
+		add(new PlaySound("trumpet"));
 		add(new Wait(5));
 		add(new SetAnimation("mario", "realmario-censored"));
 		add(new Wait(2));
 		add(new Text("well, good thing i have a fallback plan!", Color.CYAN, 4, 160, 140));
 		add(new Wait(4));
 		add(new Text("*400 COINS transfered to bankaccount*", Color.MAGENTA, 5, 160, 140));
+		add(new PlaySound("coin"));
 		add(new SetAnimation("mario", "realmario-censored-tada"));
 		add(new Wait(5));
 		add(new SetAnimation("mario", "realmario-censored"));
@@ -281,10 +298,10 @@ public class BowserScene extends Scene {
 		add(new SetAnimation("mario", "realmario-censored-tada"));		
 		add(new Wait(4));
 		add(new SetAnimation("stef", "idle-right"));
-		add(new MoveToAnim("mario", "realmario-walk", 140, 60, 64));
-		add(new SetAnimation("stef", "walk-right", false));
-		add(new SetAnimation("mario", "realmario-walk-left", false));
-		add(new Text("***", Color.MAGENTA, 3600, 150, 140));
+		add(new MoveToAnim("mario", "realmario-walk", 143, 60, 64));
+		add(new SetAnimation("stef", "kiss", false));
+		add(new SetAnimation("mario", "realmario-kiss", false));
+		add(new Text("* FIN *", Color.MAGENTA, 3600, 150, 140));
 		add(new Wait(3600));
 	}
 }

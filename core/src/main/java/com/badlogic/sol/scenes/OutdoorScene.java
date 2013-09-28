@@ -68,11 +68,11 @@ public class OutdoorScene extends Scene {
 		add(new Trigger("doorbell-trigger", 123, 112, 134, 126)
 				.add(new MoveToAnim("stef", "walk", 100, 80, 64))
 				.add(new SetAnimation("stef", "back"))
-				.add(new Text("Ding Dong", Color.BLACK, 1f, 220, 186))
+				.add(new Text("Ding Dong", Color.BLACK, 1f, 120, 186))
 				.add(new PlaySound("door-bell"))
 				.add(new Wait(1f))
 				.add(new SetAnimation("stef", "front"))
-				.add(new Text("Hihi", Color.BLACK, 1f, 220, 186))			
+				.add(new Text("Hihi", Color.BLACK, 1f, 120, 186))			
 		);
 		
 		// door trigger
