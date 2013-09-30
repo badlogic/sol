@@ -2,19 +2,11 @@ apply plugin: "java"
 apply plugin: "application"
 
 sourceCompatibility = 1.6
-mainClassName = "com.badlogic.gradletest.DesktopLauncher"
+mainClassName = "com.badlogic.sol.DesktopLauncher"
 sourceSets.main.resources.srcDirs = [file("../android/assets").getAbsolutePath()]
-
-dependencies {
-    compile "com.badlogicgames.jlayer:jlayer:1.0.1-gdx"
-    compile "com.jcraft:jorbis:0.0.15"
-    compile "com.jcraft:jogg:0.0.7"
-}
-
 
 // idea doesn't like relative paths outside of content root...
 tasks.ideaModule.doFirst { 
-	println "huzzs"
 	sourceSets.main.resources.srcDirs = [] 
 }
 
